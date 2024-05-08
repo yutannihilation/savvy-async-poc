@@ -3,9 +3,8 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# savvyAsyncPoC
-
-This repository is an experiment to use ALTREP to wrap async.
+This repository is an experiment to use ALTREP to wrap async with the
+power of my [savvy framework](https://github.com/yutannihilation/savvy).
 
 <!-- badges: start -->
 <!-- badges: end -->
@@ -49,7 +48,7 @@ x <- sleepy_vec()
 # It takes 3 seconds at the first time.
 system.time(x[1])
 #>    user  system elapsed 
-#>       0       0       3
+#>    0.00    0.00    3.02
 
 # After that, the result is cached.
 system.time(sum(x))

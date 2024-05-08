@@ -14,9 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# savvyAsyncPoC
-
-This repository is an experiment to use ALTREP to wrap async.
+This repository is an experiment to use ALTREP to wrap async with the power of my [savvy framework](https://github.com/yutannihilation/savvy).
 
 <!-- badges: start -->
 <!-- badges: end -->
