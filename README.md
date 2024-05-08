@@ -37,18 +37,19 @@ fn sleepy_vec() -> savvy::Result<savvy::Sexp> {
 
 ## Behavior
 
-Note: Of course, this is not an ideal behavior! I need to find how to
-wake the future at the creation…
-
 ``` r
 library(savvyAsyncPoC)
 
 x <- sleepy_vec()
 
-# It takes 3 seconds at the first time.
+# While I'm waiting for 1 second, the task is executed in background.
+Sys.sleep(1)
+
+# It takes 3 seconds to finish the task, and 1 second has passed.
+# So, this should take about 2 seconds.
 system.time(x[1])
 #>    user  system elapsed 
-#>    0.00    0.00    3.02
+#>    0.00    0.00    1.95
 
 # After that, the result is cached.
 system.time(sum(x))

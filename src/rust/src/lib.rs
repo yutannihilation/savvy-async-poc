@@ -48,7 +48,7 @@ impl AltInteger for SleepyVec {
 /// @export
 #[savvy]
 fn sleepy_vec() -> savvy::Result<savvy::Sexp> {
-    let f = vec_i32_async();
+    let f = smol::spawn(vec_i32_async());
     SleepyVec {
         future: Box::pin(f),
         result: None,
