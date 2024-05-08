@@ -1,0 +1,58 @@
+\[PoC\] Use async with the savvy framework
+================
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# savvyAsyncPoC
+
+This repository is an experiment to use ALTREP to wrap async.
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+## Implementation
+
+This function returns `c(1L, 2L, 3L)` after sleeping for 3 seconds.
+
+``` rust
+async fn vec_i32_async() -> Vec<i32> {
+    async {
+        Timer::after(std::time::Duration::from_secs(3)).await;
+        vec![1, 2, 3]
+    }
+    .await
+}
+
+// ...snip...
+
+#[savvy]
+fn sleepy_vec() -> savvy::Result<savvy::Sexp> {
+    let f = vec_i32_async();
+    SleepyVec {
+        future: Box::pin(f),
+        result: None,
+    }
+    .into_altrep()
+}
+```
+
+## Behavior
+
+Note: Of course, this is not an ideal behavior! I need to find how to
+wake the future at the creation…
+
+``` r
+library(savvyAsyncPoC)
+
+x <- sleepy_vec()
+
+# It takes 3 seconds at the first time.
+system.time(x[1])
+#>    user  system elapsed 
+#>       0       0       3
+
+# After that, the result is cached.
+system.time(sum(x))
+#>    user  system elapsed 
+#>       0       0       0
+```

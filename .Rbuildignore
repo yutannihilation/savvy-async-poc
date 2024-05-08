@@ -1,0 +1,6 @@
+^savvyAsyncPoC\.Rproj$
+^\.Rproj\.user$
+
+^src/rust/.cargo$
+^src/rust/target$
+^README\.Rmd$
