@@ -1,16 +1,15 @@
 use std::pin::Pin;
 
-use async_io::Timer;
-use futures_lite::Future;
 use savvy::{
     altrep::{register_altinteger_class, AltInteger},
     ffi::DllInfo,
     savvy, savvy_init,
 };
+use smol::future::Future;
 
 async fn vec_i32_async() -> Vec<i32> {
     async {
-        Timer::after(std::time::Duration::from_secs(3)).await;
+        smol::Timer::after(std::time::Duration::from_secs(3)).await;
         vec![1, 2, 3]
     }
     .await
@@ -36,7 +35,7 @@ impl AltInteger for SleepyVec {
             Some(result) => result[i],
             None => {
                 let f = self.future.as_mut();
-                let result = futures_lite::future::block_on(f);
+                let result = smol::block_on(f);
                 let out = result[i];
                 self.result = Some(result);
                 out

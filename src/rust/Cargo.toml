@@ -7,8 +7,6 @@ edition = "2021"
 crate-type = ["staticlib", "lib"]
 
 [dependencies]
-async-io = "2.3.2"
-futures-lite = "2.3.0"
 savvy = { version = "0.6.3", features = ["altrep"] }
 smol = "2.0.0"
 

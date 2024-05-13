@@ -404,8 +404,6 @@ dependencies = [
 name = "savvy_async_po_c"
 version = "0.1.0"
 dependencies = [
- "async-io",
- "futures-lite",
  "savvy",
  "smol",
 ]
